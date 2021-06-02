@@ -1,0 +1,92 @@
+# custom tag that will be added to all saved df's and models. 
+# useful if you are training say ggH classifier and want to save dataframe with ggH preselection. 
+# otherwise may get confused when training another clf like VBF 
+output_tag:
+    '1tau0lep_BDT'
+
+#.root MC files for all years (sig and bkg) should be kept in this dir:
+mc_file_dir:
+    '/home/hep/mdk16/PhD/ggtt/df_convert/'
+
+#.root Data files for all years should be kept in this dir:
+data_file_dir:
+    '/home/hep/mdk16/PhD/ggtt/df_convert/'
+
+mc_file_names:
+    sig:
+        radionM500_HHggtautau:
+            #'2016': 'ggH_UL2017.root' #re-use 2017 in 2016 for now
+            #'2017': 'ggH_UL2017.root'
+            '2018': 'ggH_UL2017.root' #re-use 2017 in 2018 for now
+    bkg:
+        DiPhoton:
+            '2018': 'DY_UL2018.root'
+        GJets:
+            '2018': 'DY_UL2018.root'
+        TTbar:
+            '2018': 'DY_UL2018.root'
+        TTGamma:
+            '2018': 'DY_UL2018.root'
+        TTGG:
+            '2018': 'DY_UL2018.root'
+        VH:
+            '2018': 'DY_UL2018.root'
+        WGamma:
+            '2018': 'DY_UL2018.root'
+        ZGamma:
+            '2018': 'DY_UL2018.root'            
+
+
+data_file_names:
+    Data:
+        #'2016': 'Data_UL2016.root'
+        #'2017': 'Data_UL2017.root'
+        '2018': 'Data_UL2018.root'
+
+#.root MC files for all years (bkg) should have these tree path:
+proc_to_tree_name:
+    radionM500_HHggtautau: 'Events'
+    Data: 'Events'
+    DiPhoton: 'Events'
+    GJets: 'Events'
+    TTbar: 'Events'
+    TTGamma: 'Events'
+    TTGG: 'Events'
+    VH: 'Events'
+    WGamma: 'Events'
+    ZGamma: 'Events'
+
+
+
+#X variables to train with. Must be in nominal_vars (unless created from existing features)
+train_vars:
+#matching ggh_dnn vars
+#        ['nJet', 'MET_pt', 'MET_phi', 'diphoton_pt_mgg',
+#       'diphoton_rapidity', 'diphoton_delta_R', 'lead_pho_ptmgg',
+#       'sublead_pho_ptmgg', 'lead_pho_eta', 'sublead_pho_eta',
+#       'lead_pho_idmva', 'sublead_pho_idmva', 'lead_pho_phi',
+#       'sublead_pho_phi', 'ele1_pt', 'ele1_eta', 'ele1_phi', 'ele2_pt',
+#       'ele2_eta', 'ele2_phi', 'ele1_tightId', 'ele2_tightId', 'muon1_pt',
+#       'muon1_eta', 'muon1_phi', 'muon2_pt', 'muon2_eta', 'muon2_phi',
+#       'muon1_tightId', 'muon2_tightId', 'tau1_pt', 'tau1_eta', 'tau1_phi',
+#       'tau2_pt', 'tau2_eta', 'tau2_phi', 'tau1_id_vs_e', 'tau1_id_vs_m',
+#       'tau1_id_vs_j', 'tau2_id_vs_e', 'tau2_id_vs_m', 'tau2_id_vs_j', 'n_tau',
+#       'n_electrons', 'n_muons', 'jet1_pt', 'jet1_eta', 'jet1_id',
+#       'jet1_bTagDeepFlavB', 'jet2_pt', 'jet2_eta', 'jet2_id',
+#       'jet2_bTagDeepFlavB', 'pt_tautauSVFitLoose', 'eta_tautauSVFitLoose',
+#       'phi_tautauSVFitLoose', 'm_tautauSVFitLoose', 'dR_tautauSVFitLoose',
+#       'dR_ggtautauSVFitLoose', 'dphi_MET_tau1', 'dR_tautauLoose',
+#       'dR_ggtautauLoose', 'dPhi_ggtautauLoose', 'dPhi_ggtautauSVFitLoose',
+#       'Category_pairsLoose']
+        ['diphoton_delta_R']
+
+vars_to_add:
+
+#preselection that will be applied to all samples
+preselection:
+    #'dielectronMass > 110 and dielectronMass < 150 and leadElectronPtOvM > 0.333 and subleadElectronPtOvM > 0.25'
+    ''
+
+#need looser cut for re-weighting around Z mass. Actual CR selection is defined is DataHandling.py
+reweight_cr:
+    'dielectronMass > 80 and dielectronMass < 150 and leadElectronPtOvM > 0.333 and subleadElectronPtOvM > 0.25'

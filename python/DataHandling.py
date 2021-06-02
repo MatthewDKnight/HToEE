@@ -216,7 +216,9 @@ class ROOTHelpers(object):
         #print 'loading {}{}_{}_df_{}.pkl'.format(df_dir, proc, self.out_tag, year)
         #df = pd.read_hdf('{}{}_{}_df_{}.h5'.format(df_dir, proc, self.out_tag, year))
         #df = pd.read_pickle('{}{}_{}_df_{}.pkl'.format(df_dir, proc, self.out_tag, year))
-        df = pd.read_csv('{}{}_{}_df_{}.csv'.format(df_dir, proc, self.out_tag, year))
+        print('loading {}{}_{}_df_{}.csv'.format(df_dir, proc, self.out_tag, year))
+	df = pd.read_csv('{}{}_{}_df_{}.csv'.format(df_dir, proc, self.out_tag, year))
+        #print(df)
         missing_vars = [x for x in self.train_vars if x not in df.columns]
         if len(missing_vars)!=0: raise IOError('Missing variables in dataframe: {}. Reload with option -r and try again'.format(missing_vars))
         else: print('Sucessfully loaded DataFrame: {}{}_{}_df_{}.csv'.format(df_dir, proc, self.out_tag, year))
