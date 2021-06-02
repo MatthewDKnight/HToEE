@@ -78,7 +78,7 @@ train_vars:
 #       'dR_ggtautauSVFitLoose', 'dphi_MET_tau1', 'dR_tautauLoose',
 #       'dR_ggtautauLoose', 'dPhi_ggtautauLoose', 'dPhi_ggtautauSVFitLoose',
 #       'Category_pairsLoose']
-        ['diphoton_delta_R']
+        ['diphoton_delta_R' , 'tau1_pt', 'lead_pho_ptmgg']
 
 vars_to_add:
 

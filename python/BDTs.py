@@ -150,7 +150,7 @@ class BDTHelpers(object):
         self.proc_arr_test    = proc_arr_test
 
         #self.X_data_train, self.X_data_test = train_test_split(self.data_obj.data_df[self.train_vars], train_size=self.train_frac, test_size=1-self.train_frac, shuffle=True, random_state=1357)
-	self.X_data_train, self.X_data_test = train_test_split(self.data_obj.data_df[self.train_vars], train_size=self.train_frac, shuffle=True, random_state=1357)
+        self.X_data_train, self.X_data_test = train_test_split(self.data_obj.data_df[self.train_vars], train_size=self.train_frac, shuffle=True, random_state=1357)
 
 
     def train_classifier(self, file_path, save=False, model_name='my_model'):
@@ -323,7 +323,16 @@ class BDTHelpers(object):
 
         self.y_pred_train = self.clf.predict_proba(self.X_train)[:,1:]
         for i in range(100):
-          print(self.y_train[i], self.y_pred_train[i], self.train_weights[i])
+          print(self.y_train[i], self.y_pred_train[i], self.train_weights_eq[i])
+
+        bkgEff, sigEff, nada = roc_curve(self.y_train, self.y_pred_train, sample_weight=self.train_weights)
+        #plt.figure(1)
+        plt.plot(bkgEff, sigEff)
+        plt.xlabel('Background efficiency')
+        plt.ylabel('Signal efficiency')
+        plt.savefig("auc.pdf")
+        plt.clf()
+
         print 'Area under ROC curve for train set is: {:.4f}'.format(roc_auc_score(self.y_train, self.y_pred_train, sample_weight=self.train_weights))
 
         self.y_pred_test = self.clf.predict_proba(self.X_test)[:,1:]
